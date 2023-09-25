@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load filename_filter %}
+
+{% block 'title' %}{{projects.title}} | FunDay{% endblock 'title' %}
+
+
+
+{% block 'content' %}
+    <main class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Funday</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Project</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{projects.title}}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+
+        <h6 class="mb-0 text-uppercase">Deatils</h6>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-primary" role="tablist">
+                    {% if projects.description %}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i></div>
+                                    <div class="tab-title">Description</div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="false">
+                            <div class="d-flex align-items-center">
+                                <div class="tab-icon"><i class='bi bi-key font-18 me-1'></i></div>
+                                <div class="tab-title">Credential</div>
+                            </div>
+                        </a>
+                    </li>
+                    {% if files %}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class='bi bi-file-earmark-text font-18 me-1'></i></div>
+                                    <div class="tab-title">Files</div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="tab-content py-3">
+                    {% if projects.description %}
+                        <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                            {{projects.description|safe}}
+                        </div>
+                    {% endif %}
+                    <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6 creds">
+                                <p><strong>Username: </strong><label><input id="copyText" class="form-control" type="text" disabled value="{{projects.username}}"><button class="copy-btn" id="copyButton">Copy <i class="bi bi-copy"></i></button></label></p>
+                                <p><strong>Password: </strong><input class="form-control" type="text" disabled value="{{projects.password}}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if files %}
+                        <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                            <div class="row g-2">
+                                <div class="col-md-12 text-end">
+                                    <a href="{% url "addfiles" projects.id %}" class="btn btn-primary mb-3">+ Add Files</a>
+                                </div>
+                                {% for x in files %}
+                                    <div class="col-md-4">
+                                    {% if x.file|get_extension == 'zip' %}
+                                        <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-zip-fill"></i> {{x.file|filename }}</a>
+                                    {% endif %}
+                                    {% if x.file|get_extension == 'docx' %}
+                                        <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-word-fill word"></i> {{x.file|filename }}</a> 
+                                    {% endif %}
+                                    {% if x.file|get_extension == 'pdf' %}
+                                        <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-pdf-fill pdf"></i> {{x.file|filename }}</a>
+                                    {% endif %}
+                                    {% comment %} {% if x.file|get_extension == 'jpg' %}
+                                        <a class="files" href="/media/{{x.file}}" download><img src="/media/{{x.file}}"></a>
+                                    {% endif %} {% endcomment %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock 'content' %}
+
+    

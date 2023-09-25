@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load filename_filter %}
+
+{% block 'title' %}Projects{% endblock 'title' %}
+
+{% block 'content' %}
+    <main class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Funday</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Files</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-2">
+                    {% for x in files %}
+                        <div class="col-md-4">
+                            {% if x.file|get_extension == 'zip' %}
+                                <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-zip-fill"></i> {{x.file|filename }}</a> <br>
+                            {% endif %}
+                            {% if x.file|get_extension == 'docx' %}
+                                <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-word-fill word"></i> {{x.file|filename }}</a> <br>
+                            {% endif %}
+                            {% if x.file|get_extension == 'pdf' %}
+                                <a class="files" href="/media/{{x.file}}" download><i class="bi bi-file-earmark-pdf-fill pdf"></i> {{x.file|filename }}</a> <br>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock 'content' %}
+
+    

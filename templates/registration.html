@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/static/css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/jquery.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap">
+</head>
+
+<body>
+
+    <section class="py-5">
+        <div class="container center">
+            <div class="form-box">
+                <h3 class="text-center ">Register User</h3>
+                <form method="post" class="text-center">
+                    {% csrf_token %}
+                    <input type="text" placeholder="First Name *" class="form-control mb-3" name="firstname" required>
+                    <input type="text" placeholder="Last Name *" class="form-control mb-3" name="lastname" required>
+                    <input type="email" placeholder="Email *" class="form-control mb-3" name="email">
+                    <input type="password" placeholder="Password" class="form-control mb-3" name="password">
+                    <button class="btn btn-dark">Register</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="/static/js/bootstrap.bundle.js"></script>
+    <script src="/static/js/swiper.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+    

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block 'title' %}{{ post.title }}{% endblock 'title' %}
+{% block 'banner' %}
+    <section class="inner-banner center">
+        <div class="container">
+            <h1>{{ post.title }}</h1>
+        </div>
+    </section>
+{% endblock 'banner' %}
+
+
+{% block 'content' %}
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <img src="/media/{{ post.thumbnail }}" class="img-fluid mb-3"><br>
+                    <span class="badge text-bg-dark">{{ post.date_created|date:"M d, Y" }}</span>
+                    <h2 class="mt-4"><strong>{{post.title}}</strong></h2>
+                    <div class="content mt-4">
+                        {{post.content|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock 'content' %}
+
+    

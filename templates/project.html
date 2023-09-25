@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block 'title' %}Projects | FunDay{% endblock 'title' %}
+
+
+
+{% block 'content' %}
+    <main class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Funday</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Projects</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+
+        <h6 class="mb-0 text-uppercase">All project</h6>
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Assigned To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for x in project %}
+                                    <tr>
+                                        <td><a href="{% url "projectdetails" x.slug %}">{{ x.title }}</a></td>
+                                        <td><span class="badge {% if x.status_id == 1 %} bg-danger{% elif x.status_id == 2 %} bg-warning{% elif x.status_id == 3 %} bg-success{% endif %}">{{ x.status }}</span></td>
+                                        <td>{{x.associate}}</td>
+                                        <td>{% if request.user.id == x.associate_id %}<a class="badge bg-info" href="{% url "projectedit" x.id %}">Edit <i class="bi bi-pencil-fill"></i></a>&nbsp;&nbsp; {% endif %}<a class="badge bg-success" href="{% url "projectdetails" x.slug %}">View <i class="bi bi-eye-fill"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            {% comment %} <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                </tr>
+                            </tfoot> {% endcomment %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </main>
+{% endblock 'content' %}
+
+    
