@@ -41,25 +41,7 @@
                 <div class="mobile-toggle-icon d-xl-none">
                     <i class="bi bi-list"></i>
                 </div>
-                <div class="top-navbar d-none d-xl-block">
-                    <ul class="navbar-nav align-items-center">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="app-emailbox.html">Email</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:;">Projects</a>
-                        </li>
-                        <li class="nav-item d-none d-xxl-block">
-                            <a class="nav-link" href="javascript:;">Events</a>
-                        </li>
-                        <li class="nav-item d-none d-xxl-block">
-                            <a class="nav-link" href="app-to-do.html">Todo</a>
-                        </li>
-                    </ul>
-                </div>
+
                 <div class="search-toggle-icon d-xl-none ms-auto">
                     <i class="bi bi-search"></i>
                 </div>
@@ -104,7 +86,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    {% comment %} <li>
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex align-items-center">
                                                 <div class="setting-icon"><i class="bi bi-gear-fill"></i></div>
@@ -135,7 +117,7 @@
                                                 <div class="setting-text ms-3"><span>Downloads</span></div>
                                             </div>
                                         </a>
-                                    </li>
+                                    </li> {% endcomment %}
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -607,6 +589,8 @@
 
                             <a href="{% url "home" %}" class="list-group-item"><i class="bi bi-speedometer2"></i>Dashboard</a>
                             <a href="{% url "project" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Projects</a>
+                            <a href="{% url "task" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Task</a>
+                            {% if request.user.is_staff == 1 %}<a href="{% url "registration" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Register User</a>{% endif %}
                             {% comment %} <a href="{% url "files" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Files</a> {% endcomment %}
                         </div>
                     </div>
@@ -715,29 +699,16 @@
         tinymce.init({selector:'textarea'});
         $(document).ready(function() {
             $("#copyButton").click(function() {
-                // Get the value from the input field
                 var inputValue = $("#copyText").val();
-
-                // Create a temporary textarea element and set its value
                 var tempTextarea = $("<textarea>");
                 tempTextarea.val(inputValue);
-
-                // Append the textarea to the document
                 $("body").append(tempTextarea);
-
-                // Select the text in the textarea
                 tempTextarea.select();
                 tempTextarea[0].setSelectionRange(0, 99999); // For mobile devices
-
-                // Copy the text to the clipboard
                 document.execCommand("copy");
-
-                // Remove the temporary textarea
                 tempTextarea.remove();
-
-                // Provide feedback to the user
                 //$("#copyStatus").text("Text copied to clipboard: " + inputValue);
-                alert('Hello');
+                //alert('Hello');
             });
         });
     </script>

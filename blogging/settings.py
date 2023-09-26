@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'core',
     'blog',
     'account',
-    'project'
+    'project',
+    'task'
+
 ]
 
 AUTH_USER_MODEL = 'account.Member'

@@ -27,6 +27,7 @@ urlpatterns = [
     path('', core_view.Home, name='home'),
     path('blog/', include('blog.urls')),
     path('project/', include('project.urls')),
+    path('task/', include('task.urls')),
     path('registration/', acc_view.Registration, name='registration'),
     path('login/', acc_view.Login, name='login'),
     path('logout/', acc_view.Logout, name='logout'),
