@@ -33,5 +33,5 @@ def ChangeAssign(request, id):
         new_id = request.POST['assignes']
         task.assigned_to = Member.objects.get(pk=new_id)
         task.save()
-        return redirect('task')
+        return redirect(request.META.get('HTTP_REFERER', 'home'))
     

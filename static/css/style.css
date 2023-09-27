@@ -1769,3 +1769,15 @@ a {
     display: block;
     position: relative;
 }
+
+.project{
+    color: #aaa;
+    font-size: 12px;
+}
+
+.assign-select{
+    display: inline-block;
+    width: auto;
+    padding: 4px 10px;
+    margin-left: 10px;
+}

@@ -12,9 +12,9 @@ class TaskStatus(models.Model):
     def __str__(self):
         return self.title
 
-LOW = 0
-NORMAL = 1
-HIGH = 2
+LOW = 3
+NORMAL = 2
+HIGH = 1
 STATUS_CHOICES = (
     (LOW, 'Low'),
     (NORMAL, 'Normal'),

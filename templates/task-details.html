@@ -40,9 +40,9 @@
                                 <tbody>
                                     {% for x in tasks %}
                                         <tr>
-                                            <td>{{ x.title }}</td>
+                                            <td><a href="{% url "taskdetails" x.id %}">{{ x.title }}</a></td>
                                             <td>{{ x.project }}</td>
-                                            <td><span class="badge {% if x.priority == 1 %} bg-success{% elif x.priority == 2 %} bg-warning{% elif x.priority == 3 %} bg-danger{% endif %}">{{ x.priority }}</span></td>
+                                            <td><span class="badge {% if x.priority == 1 %} bg-danger{% elif x.priority == 2 %} bg-warning{% elif x.priority == 3 %} bg-success{% endif %}">{{ x.priority }}</span></td>
                                             <td><span class="badge {% if x.status_id == 1 %} bg-danger{% elif x.status_id == 2 %} bg-warning{% elif x.status_id == 3 %} bg-success{% endif %}">{{ x.status }}</span></td>
                                         </tr>
                                     {% endfor %}
@@ -57,16 +57,23 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="mb-2">{{ task.title }}</h5>
-                        <p class="mb-1"><label>Assignee :</label>
-                            <form method="post" action="{% url "changeassign" task.id %}">
-                                {% csrf_token %}
-                                <select name="assignes" id="" class="form-control" onchange="this.form.submit()">
-                                    {% for x in users %}
-                                        <option value="{{x.id}}"  {% if  task.assigned_to_id ==  x.id %}selected{% endif %}>{{x.first_name}} {{x.last_name}}</option>
-                                    {% endfor %}
-                                </select>
-                            </form>
-                        </p>
+                        <p class="project mb-3">{{task.project}}</p>
+                        <form method="post" action="{% url "changeassign" task.id %}">
+                            {% csrf_token %}
+                            <label>Assignee :<select name="assignes" class="form-control assign-select" onchange="this.form.submit()">
+                                {% for x in users %}
+                                    {% if x.is_superuser != 1 %}
+                                        <option value="{{x.id}}"  {% if  task.assigned_to_id ==  x.id %}selected{% endif %}> {{x.first_name}} {{x.last_name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select></label>
+                        </form>
+
+                        <hr>
+                        <div>
+                            {{ task.comments|safe }}
+                        </div>
+
                     </div>
                 </div>
             </div>
