@@ -1781,3 +1781,15 @@ a {
     padding: 4px 10px;
     margin-left: 10px;
 }
+
+.cmt-img img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+}
+.cmt-item{
+    display: flex;
+    gap: 20px;
+}

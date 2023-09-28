@@ -34,3 +34,11 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+class Commemts(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
+    description = models.TextField()
+    commented_at = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.description

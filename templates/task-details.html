@@ -73,7 +73,29 @@
                         <div>
                             {{ task.comments|safe }}
                         </div>
-
+                        <div>
+                            {% for x in commemts %}
+                                <div class="cmt-item">
+                                    <div class="cmt-img">
+                                        <img src="/media/{{x.member.profile_image}}">
+                                    </div>
+                                    <div class="cmt-text">
+                                        {{x.member.first_name}} {{x.member.last_name}} <span class="project">{{x.commented_at|date:"M d, Y"}}</span>
+                                        <div>
+                                            {{x.description|safe}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                        <div>
+                            <form method="post" action="{% url "addcomment" task.id %}">
+                                {% csrf_token %}
+                                <textarea name="comments" class="form-control"></textarea>
+                                <button type="submit" class="btn btn-primary mt-2">Save</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
