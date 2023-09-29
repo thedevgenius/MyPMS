@@ -67,6 +67,7 @@
                             <div class="col-md-6 creds">
                                 <p><strong>Username: </strong><label><input id="copyText" class="form-control" type="text" disabled value="{{projects.username}}"><button class="copy-btn" id="copyButton">Copy <i class="bi bi-copy"></i></button></label></p>
                                 <p><strong>Password: </strong><input class="form-control" type="text" disabled value="{{projects.password}}"></p>
+                                {{projects.extra_credential|safe}}
                             </div>
                         </div>
                     </div>

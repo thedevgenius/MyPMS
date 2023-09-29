@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
+    'ckeditor',
+    'ckeditor_uploader',
     'core',
     'blog',
     'account',
@@ -137,45 +139,36 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            {'name': 'document', 'items': ['Source']},
+            #{'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            #{'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']},
+            {'name': 'insert', 'items': ['Flash', 'Table', 'HorizontalRule', 'Smiley', '-', 'Link', 'Unlink']},
+            {'name': 'basicstyles', 'items': ['Bold', 'Italic', 'Underline' '-', 'RemoveFormat']},
+            {'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
+            #{'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            #{'name': 'insert', 'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe', '-', 'Link', 'Unlink']},
+            {'name': 'styles', 'items': ['Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            #{'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            #{'name': 'about', 'items': ['About']},
+            '/',  # Add this line to create a new toolbar row
+        ],
+        'width': 'auto',
+    },
+}
+
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TINYMCE_JS_URL = "https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
 
-TINYMCE_COMPRESSOR = False
-
-
-TINYMCE_DEFAULT_CONFIG = {
-    "entity_encoding": "raw",
-    "menubar": "file edit view insert format tools table help",
-    "plugins": 'print preview paste importcss searchreplace autolink autosave save code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons quickbars',
-    "toolbar": "fullscreen preview | undo redo | bold italic forecolor backcolor | formatselect | image link | "
-    "alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | fontsizeselect "
-    "emoticons | ",
-    "custom_undo_redo_levels": 50,
-    "quickbars_insert_toolbar": False,
-    "file_picker_callback": """function (cb, value, meta) {
-        var input = document.createElement("input");
-        input.setAttribute("type", "file");
-        if (meta.filetype == "image") {
-            input.setAttribute("accept", "image/*");
-        }
-        if (meta.filetype == "media") {
-            input.setAttribute("accept", "video/*");
-        }
-
-        input.onchange = function () {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                var id = "blobid" + (new Date()).getTime();
-                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                var base64 = reader.result.split(",")[1];
-                var blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-                cb(blobInfo.blobUri(), { title: file.name });
-            };
-            reader.readAsDataURL(file);
-        };
-        input.click();
-    }""",
-    "content_style": "body { font-family:Roboto,Helvetica,Arial,sans-serif; font-size:14px }",
-}

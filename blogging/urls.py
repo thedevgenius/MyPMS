@@ -24,6 +24,7 @@ from account import views as acc_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', core_view.Home, name='home'),
     path('blog/', include('blog.urls')),
     path('project/', include('project.urls')),

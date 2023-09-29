@@ -52,3 +52,4 @@ def AddComment(request, id):
             description=description
         )
         return redirect(request.META.get('HTTP_REFERER', 'home'))    
+

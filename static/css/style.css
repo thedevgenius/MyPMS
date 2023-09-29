@@ -1793,3 +1793,8 @@ a {
     display: flex;
     gap: 20px;
 }
+
+.django-ckeditor-widget{
+    display: block !important;
+    width: 100% !important;
+}

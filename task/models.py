@@ -3,7 +3,7 @@ from account.models import *
 from project.models import *
 import uuid
 from datetime import datetime
-from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class TaskStatus(models.Model):
@@ -28,7 +28,7 @@ class Task(models.Model):
     assigned_to = models.ForeignKey(Member, on_delete=models.CASCADE)
     priority = models.IntegerField(default=1, choices=STATUS_CHOICES)
     status = models.ForeignKey(TaskStatus, on_delete=models.CASCADE)
-    comments = HTMLField()
+    comments = RichTextField(config_name='default')
     created_at = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -37,7 +37,7 @@ class Task(models.Model):
 class Commemts(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
-    description = models.TextField()
+    description = RichTextField(config_name='default')
     commented_at = models.DateTimeField(default=datetime.now)
 
     def __str__(self):

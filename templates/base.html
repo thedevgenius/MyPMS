@@ -5,6 +5,7 @@
 <html lang="en" class="minimal-theme">
 {% endif %}
 
+{% load static %}
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -695,8 +696,24 @@
     <script src="/static/js/table-datatable.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/index5.js"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
     <script>
-        tinymce.init({selector:'textarea'});
+        {% comment %} tinymce.init({
+            selector: 'textarea',
+            menubar: 'file edit view insert format tools table help',
+            plugins: 'ai tinycomments mentions anchor autolink codesample emoticons image link lists searchreplace table  wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect',
+            toolbar: 'undo redo | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        }); {% endcomment %}
+
+
         $(document).ready(function() {
             $("#copyButton").click(function() {
                 var inputValue = $("#copyText").val();

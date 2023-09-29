@@ -1,7 +1,8 @@
 from django.db import models
 from account.models import Member
 from datetime import datetime
-from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 import os
 
@@ -17,12 +18,12 @@ class Project(models.Model):
     slug = models.SlugField(default='', null=True, blank=True, max_length=100)
     associate = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
     status = models.ForeignKey(ProjectStatus, on_delete=models.CASCADE)
-    description = HTMLField(null=True, blank=True)
+    description = RichTextField(null=True, blank=True, config_name='default')
     url = models.URLField(default='', null=True, blank=True)
     adminurl = models.URLField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=255, default='', null=True, blank=True)
     password = models.CharField(max_length=255, default='', null=True, blank=True)
-    extra_credential = HTMLField(null=True, blank=True)
+    extra_credential = RichTextUploadingField(null=True, blank=True)
     date_created = models.DateTimeField(default=datetime.now)
     
     def save(self, *args, **kwargs):

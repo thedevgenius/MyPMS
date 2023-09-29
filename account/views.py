@@ -45,7 +45,7 @@ def Login(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('task')
         else:
             messages.error(request, 'Email or Password is wrong.')
     else:
