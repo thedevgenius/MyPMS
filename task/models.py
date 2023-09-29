@@ -1,7 +1,7 @@
+import uuid
 from django.db import models
 from account.models import *
 from project.models import *
-import uuid
 from datetime import datetime
 from ckeditor.fields import RichTextField
 # Create your models here.
@@ -11,6 +11,10 @@ class TaskStatus(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = 'Task Status'
+        verbose_name_plural = 'Task Status'
 
 LOW = 3
 NORMAL = 2
@@ -34,6 +38,9 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Task'
+
 class Commemts(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
@@ -42,3 +49,6 @@ class Commemts(models.Model):
 
     def __str__(self):
         return self.description
+    
+    class Meta:
+        verbose_name = 'Comment'

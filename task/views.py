@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def TaskDispaly(request):
     theme = request.session.get('inlineRadioOptions')
-    tasks = Task.objects.filter(assigned_to_id=request.user.id)
+    tasks = Task.objects.filter(assigned_to=request.user.id).order_by('priority')
 
     data = {
         'theme' : theme,
@@ -17,7 +17,7 @@ def TaskDispaly(request):
 @login_required
 def TaskDetails(request, id):
     theme = request.session.get('inlineRadioOptions')
-    tasks = Task.objects.filter(assigned_to_id=request.user.id)
+    tasks = Task.objects.filter(assigned_to=request.user.id)
     task = get_object_or_404(Task, id=id)
     users = Member.objects.all()
     commemts = Commemts.objects.filter(task_id=id)

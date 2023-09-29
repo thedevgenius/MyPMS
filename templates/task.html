@@ -22,33 +22,33 @@
         <!--end breadcrumb-->
 
         <h6 class="mb-0 text-uppercase">All Task For You</h6>
-            <hr />
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped" style="width:100%">
-                            <thead>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Task Name</th>
+                                <th>Project</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in tasks %}
                                 <tr>
-                                    <th>Task Name</th>
-                                    <th>Project</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
+                                    <td><a href="{% url "taskdetails" x.id %}">{{ x.title }}</a></td>
+                                    <td>{{ x.project }}</td>
+                                    <td><span class="badge {% if x.priority == 1 %} bg-danger{% elif x.priority == 2 %} bg-warning{% elif x.priority == 3 %} bg-success{% endif %}">{{ x.priority }}</span></td>
+                                    <td><span class="badge {% if x.status_id == 1 %} bg-danger{% elif x.status_id == 2 %} bg-warning{% elif x.status_id == 3 %} bg-success{% endif %}">{{ x.status }}</span></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {% for x in tasks %}
-                                    <tr>
-                                        <td><a href="{% url "taskdetails" x.id %}">{{ x.title }}</a></td>
-                                        <td>{{ x.project }}</td>
-                                        <td><span class="badge {% if x.priority == 1 %} bg-danger{% elif x.priority == 2 %} bg-warning{% elif x.priority == 3 %} bg-success{% endif %}">{{ x.priority }}</span></td>
-                                        <td><span class="badge {% if x.status_id == 1 %} bg-danger{% elif x.status_id == 2 %} bg-warning{% elif x.status_id == 3 %} bg-success{% endif %}">{{ x.status }}</span></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </main>
 {% endblock 'content' %}
 

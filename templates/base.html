@@ -567,8 +567,7 @@
                 </div>
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboards">
-                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-dashboards"
-                            type="button"><i class="bi bi-house-door-fill"></i></button>
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-dashboards" type="button"><i class="bi bi-house-door-fill"></i></button>
                     </li>
                     
                 </ul>
@@ -588,10 +587,10 @@
                                 <small class="mb-0">Some placeholder content</small>
                             </div> {% endcomment %}
 
-                            <a href="{% url "home" %}" class="list-group-item"><i class="bi bi-speedometer2"></i>Dashboard</a>
-                            <a href="{% url "project" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Projects</a>
-                            <a href="{% url "task" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Task</a>
-                            {% if request.user.is_staff == 1 %}<a href="{% url "registration" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Register User</a>{% endif %}
+                            <a href="{% url 'home' %}" class="list-group-item"><i class="bi bi-speedometer2"></i>Dashboard</a>
+                            <a href="{% url 'project' %}" class="list-group-item"><i class="bi bi-cast"></i></i>Projects</a>
+                            <a href="{% url 'task' %}" class="list-group-item"><i class="bi bi-list-task"></i>Task</a>
+                            {% if request.user.is_staff == 1 %}<a href="{% url 'registration' %}" class="list-group-item"><i class="bi bi-person-add"></i>Register User</a>{% endif %}
                             {% comment %} <a href="{% url "files" %}" class="list-group-item"><i class="bi bi-cast"></i></i>Files</a> {% endcomment %}
                         </div>
                     </div>
@@ -603,7 +602,7 @@
 
 
         {% block 'content' %}{% endblock 'content' %}
-
+        <div ></div>        
 
 
         <!--start overlay-->
@@ -699,21 +698,6 @@
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
     <script>
-        {% comment %} tinymce.init({
-            selector: 'textarea',
-            menubar: 'file edit view insert format tools table help',
-            plugins: 'ai tinycomments mentions anchor autolink codesample emoticons image link lists searchreplace table  wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect',
-            toolbar: 'undo redo | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
-        }); {% endcomment %}
-
-
         $(document).ready(function() {
             $("#copyButton").click(function() {
                 var inputValue = $("#copyText").val();
