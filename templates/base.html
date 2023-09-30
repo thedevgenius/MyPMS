@@ -140,7 +140,7 @@
                                     class="bi bi-speedometer2"></i>Dashboard</a>
                             <a href="{% url 'project' %}" class="list-group-item"><i
                                     class="bi bi-cast"></i></i>Projects</a>
-                            <a href="{% url 'task' %}" class="list-group-item"><i class="bi bi-list-task"></i>Task</a>
+                            <a href="{% url 'task' %}" class="list-group-item"><i class="bi bi-list-task"></i>My Tasks</a>
                             {% if request.user.is_staff == 1 %}<a href="{% url 'registration' %}"
                                 class="list-group-item"><i class="bi bi-person-add"></i>Register User</a>{% endif %}
                             {% comment %} <a href="{% url " files" %}" class="list-group-item"><i
