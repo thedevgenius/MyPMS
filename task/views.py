@@ -21,13 +21,15 @@ def TaskDetails(request, id):
     task = get_object_or_404(Task, id=id)
     users = Member.objects.all()
     commemts = Commemts.objects.filter(task_id=id)
+    files = CommentFile.objects.all()
 
     data = {
         'theme' : theme,
         'tasks' : tasks,
         'task' : task,
         'users' : users,
-        'commemts' : commemts
+        'commemts' : commemts,
+        'files' : files
     }
     return render(request, 'task-details.html', data)
 
@@ -46,10 +48,16 @@ def AddComment(request, id):
         task = get_object_or_404(Task, id=id)
         member = get_object_or_404(Member, id=request.user.id)
         description = request.POST['comments']
-        Commemts.objects.create(
+        comment = Commemts.objects.create(
             task=task,
             member=member,
             description=description
         )
+        files = request.FILES.getlist('commentfiles')
+        for file in files:
+            CommentFile.objects.create(
+                file = file,
+                commemt = comment
+            )
         return redirect(request.META.get('HTTP_REFERER', 'home'))    
 

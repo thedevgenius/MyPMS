@@ -52,3 +52,11 @@ class Commemts(models.Model):
     
     class Meta:
         verbose_name = 'Comment'
+
+class CommentFile(models.Model):
+    file = models.FileField(upload_to='file/', max_length=255)
+    commemt = models.ForeignKey(Commemts, on_delete=models.CASCADE)
+    attached_at = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return os.path.basename(self.file.name)

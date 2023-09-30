@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load filename_filter %}
 
 {% block 'title' %}Tasks | FunDay{% endblock 'title' %}
 
@@ -24,7 +25,7 @@
         <h6 class="mb-0 text-uppercase">All Task For You</h6>
         <hr />
         <div class="row g-2">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -53,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="mb-2">{{ task.title }}</h5>
@@ -71,8 +72,10 @@
 
                         <hr>
                         <div>
+                            <strong>Details</strong>
                             {{ task.comments|safe }}
                         </div>
+                        <hr>
                         <div>
                             {% for x in commemts %}
                                 <div class="cmt-item">
@@ -80,19 +83,26 @@
                                         <img src="/media/{{x.member.profile_image}}">
                                     </div>
                                     <div class="cmt-text">
-                                        {{x.member.first_name}} {{x.member.last_name}} <span class="project">{{x.commented_at|date:"M d, Y"}}</span>
+                                        <p class="cmt-name"><em>{{x.member.first_name}} {{x.member.last_name}} <span class="project">{{x.commented_at|date:"M d, Y"}}</em></span></p>
                                         <div>
                                             {{x.description|safe}}
+                                            {% for y in files %}{% if y.commemt_id == x.id %}
+                                                {% if y.file|get_extension == 'jpg' or y.file|get_extension == 'png' %}
+                                                    <img class="mt-2" src="/media/{{y.file}}">
+                                                {% else %}
+                                                    <a download href="/media/{{y.file}}">{{y.file|filename}}</a>
+                                                {% endif %}
+                                            {% endif %}{% endfor %}
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
-                        <hr>
-                        <div>
-                            <form method="post" action="{% url "addcomment" task.id %}">
+                        <div class="mt-4">
+                            <form method="post" enctype="multipart/form-data" action="{% url 'addcomment' task.id %}">
                                 {% csrf_token %}
-                                <textarea name="comments" class="form-control"></textarea>
+                                <textarea name="comments" id="commemts" class="form-control"></textarea>
+                                <div class="attach"><input type="file" name="commentfiles" class="mt-2" multiple></div>
                                 <button type="submit" class="btn btn-primary mt-2">Save</button>
                             </form>
                         </div>
