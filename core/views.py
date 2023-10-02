@@ -6,7 +6,7 @@ from task.models import *
 
 # Create your views here.
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-# @login_required
+@login_required
 def Home(request):
     theme = request.session.get('inlineRadioOptions')
     taskcount = Task.objects.count()
