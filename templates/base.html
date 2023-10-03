@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="en" class="dark-theme">
 {% load static %}
 
 <head>
@@ -98,6 +99,7 @@
                     </ul>
                 </div>
             </nav>
+            
         </header>
         <!--end top header-->
 
@@ -130,13 +132,14 @@
                                 <small class="mb-0">Some placeholder content</small>
                             </div> {% endcomment %}
 
-                            <a href="{% url 'home' %}" class="list-group-item"><i
-                                    class="bi bi-speedometer2"></i>Dashboard</a>
-                            <a href="{% url 'project' %}" class="list-group-item"><i
-                                    class="bi bi-cast"></i></i>Projects</a>
+                            <a href="{% url 'home' %}" class="list-group-item"><i class="bi bi-speedometer2"></i>Dashboard</a>
+                            <a href="{% url 'project' %}" class="list-group-item"><i class="bi bi-cast"></i></i>Projects</a>
                             <a href="{% url 'task' %}" class="list-group-item"><i class="bi bi-list-task"></i>My Tasks</a>
-                            {% if request.user.is_staff == 1 %}<a href="{% url 'registration' %}"
-                                class="list-group-item"><i class="bi bi-person-add"></i>Register User</a>{% endif %}
+
+                            {% if request.user.is_staff == 1 %}
+                                <a href="{% url 'addtask' %}" class="list-group-item"><i class="bi bi-list-task"></i>Add Tasks</a>
+                                <a href="{% url 'registration' %}" class="list-group-item"><i class="bi bi-person-add"></i>Register User</a>
+                            {% endif %}
                             {% comment %} <a href="{% url " files" %}" class="list-group-item"><i
                                     class="bi bi-cast"></i></i>Files</a> {% endcomment %}
                         </div>
@@ -263,6 +266,8 @@
                 //$("#copyStatus").text("Text copied to clipboard: " + inputValue);
                 //alert('Hello');
             });
+
+            
         });
         CKEDITOR.replace('commemts', {
         // Define the toolbar groups as it is a more accessible solution.

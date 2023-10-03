@@ -88,7 +88,7 @@
                                             {{x.description|safe}}
                                             {% for y in files %}{% if y.commemt_id == x.id %}
                                                 {% if y.file|get_extension == 'jpg' or y.file|get_extension == 'png' %}
-                                                    <img class="mt-2" src="/media/{{y.file}}">
+                                                    <img class="mt-2 img-fluid" src="/media/{{y.file}}">
                                                 {% else %}
                                                     <a download href="/media/{{y.file}}">{{y.file|filename}}</a>
                                                 {% endif %}
@@ -98,6 +98,10 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        <div id="content-list">
+                            <!-- Content will be displayed here without page reload -->
+                        </div>
+
                         <div class="mt-4">
                             <form method="post" enctype="multipart/form-data" action="{% url 'addcomment' task.id %}">
                                 {% csrf_token %}

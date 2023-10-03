@@ -33,6 +33,7 @@ class Task(models.Model):
     priority = models.IntegerField(default=1, choices=STATUS_CHOICES)
     status = models.ForeignKey(TaskStatus, on_delete=models.CASCADE)
     comments = RichTextField(config_name='default')
+    files = models.ImageField(upload_to='file/', null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.now)
 
     def __str__(self):

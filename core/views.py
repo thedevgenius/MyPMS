@@ -10,10 +10,12 @@ from task.models import *
 def Home(request):
     theme = request.session.get('inlineRadioOptions')
     taskcount = Task.objects.count()
+    projectcount = Project.objects.count()
 
     data = {
         'theme' : theme,
-        'taskcount' : taskcount
+        'taskcount' : taskcount,
+        'projectcount' : projectcount
     }
 
     return render(request, 'index.html', data)

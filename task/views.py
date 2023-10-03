@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib.auth.decorators import login_required
+from .forms import *
 
 # Create your views here.
 @login_required
@@ -13,6 +14,20 @@ def TaskDispaly(request):
         'tasks' : tasks
     }
     return render(request, 'task.html', data)
+
+@login_required
+def AddTask(request):
+    if request.method == 'POST':
+        form = TaskAddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('task')
+    else:
+        form = TaskAddForm()
+    data = {
+        'form' : form
+    }
+    return render(request, 'add-task.html', data)
 
 @login_required
 def TaskDetails(request, id):
